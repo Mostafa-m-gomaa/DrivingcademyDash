@@ -35,6 +35,67 @@
 .articles .confirm .btns .no {
   background-color: green;
 }
+.articles .show-ques {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.884);
+  text-align: center;
+  padding: 15px;
+  border-radius: 10px;
+  z-index: 120;
+  width: 70%;
+  color: black;
+  border: 2px solid var(--clr-pumpkin);
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  max-height: 90vh;
+}
+.articles .show-ques button {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+  margin: auto;
+}
+.articles .show-ques .question-card {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+.articles .show-ques .question-card img {
+  max-width: 160px;
+  border-radius: 10px;
+  margin: auto;
+}
+.articles .show-ques .question-card .question {
+  font-size: 17px;
+  font-weight: bold;
+}
+.articles .show-ques .question-card .answer {
+  font-size: 15px;
+  font-weight: bold;
+}
+.articles .show-ques .close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: red;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
 .articles .add-question {
   position: fixed;
   top: 50%;

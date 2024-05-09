@@ -9,12 +9,12 @@ import ReactPlayer from 'react-player';
 
 const Exams = () => {
 
+  const {route ,setLoader ,filesRoute }=useContext(AppContext)
   const [image, setImage] = useState(null);
 
   const [showConfirm ,setShowConfirm]=useState(false)
   const [artId,setArtId]=useState("")
   const [refresh ,setRefresh]=useState(false)
-  const {route ,setLoader }=useContext(AppContext)
   const [titleAr,setTitleAr]=useState("")
   const [titleHol,setTitleHol]=useState("")
   const [descAr,setDescAr]=useState("")
@@ -37,7 +37,8 @@ const Exams = () => {
     const [answerHol,setAnswerHol]=useState([])
     const [examId,setExamId]=useState("")
     const [stage,setStage]=useState("")
-
+    const [questions,setQuestions]=useState([])
+    const [showQuestions,setShowQuestions]=useState(false)
 
 
 
@@ -153,6 +154,7 @@ console.log(answerStrEn.split(","))
      
     }
   };
+  
 
   const deleteArt =()=>{
     setLoader(true)
@@ -179,11 +181,62 @@ setRefresh(!refresh)
     })
 
   }
+  const deleteQues =(id)=>{
+    setLoader(true)
+    setShowConfirm(false)
+    fetch(`${route}/exams/removeQuestion/${examId}`,{
+      method :"PUT" ,
+      headers :{
+        "Authorization" :`Bearer ${sessionStorage.getItem("token")}` ,
+        "content-type":"application/json"
+      },
+      body :JSON.stringify({
+        questionId:id
+      })
+    })
+    .then(res => {res.json()
+      console.log(res)
+      setLoader(false)
+            if(res.status === 200){
+toast.success("تم الحذف بنجاح")
+setRefresh(!refresh)
+getQuestions(examId)
+      }
+   
+      else{
+        toast.error("لم يتم الحذف")
+      }
+
+
+    })
+
+  }
 
   const addQuestion =(id)=>{
     setShowAdd(true)
     setExamId(id)   
 
+  }
+  const getQuestions =(id)=>{
+    setExamId(id)
+    setLoader(true)
+
+    fetch(`${route}/exams/${id}`,{
+      headers :{
+"Authorization" :`Bearer ${sessionStorage.getItem("token")}`
+
+      }
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      setLoader(false)
+      console.log(data)
+      if(data.data){
+        setQuestions(data.data.questions)
+        setShowQuestions(true)
+
+      }
+    })
   }
   
 
@@ -313,6 +366,37 @@ setRefresh(!refresh)
         </div>
   </div>
   : null}
+
+
+  {showQuestions ? 
+  <div className='show-ques'>
+    <div className="close" onClick={(e)=>setShowQuestions(false)}>x</div>
+
+    {questions.map((ques,index)=>{
+      return(
+        <div className='question-card' key={index}>
+          <div className='question'>{ques.question_en}</div>
+     
+          <div className='answers'>
+            {ques.options_en.map((ans,index)=>{
+              return(
+                <div className='ans' key={index}>{ans}</div>
+              )
+            })
+
+            }
+
+          </div>
+          <div className='answer'>{ques.answer_en}</div>
+          {/* <div className='stage'>stage: {ques.stage}</div> */}
+          <img src={`${filesRoute}/${ques.image}`} />
+          <button onClick={() => deleteQues(ques._id)}>Delete</button>
+          
+        </div>
+      )
+    }
+    )}
+  </div>  : null}
     <div className="container">
         <div className="add">
           <h1>Add Exam </h1>
@@ -379,6 +463,7 @@ setRefresh(!refresh)
                   <img src={art.content} />
                   <button onClick={() => deleteButton(art._id)}>Delete</button>
                   <button className='add-ques' onClick={() => addQuestion(art._id)}>Add Question</button>
+                  <button className='add-ques' onClick={() => getQuestions(art._id)}>Questions</button>
                 </div>
               )
             })}

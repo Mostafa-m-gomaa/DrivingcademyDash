@@ -27,7 +27,7 @@ function App() {
   const [headTitle,setHeadTitle]=useState("تسجيل الدخول")
   const [login,setLogin]=useState(false)
   // const [route ,setRoute]=useState("https://api.max-sy.com/api")
-  // const [filesRoute ]=useState("https://api.max-sy.com/storage")
+  const [filesRoute ]=useState("https://api.theoriehaast.nl/questionsImages")
   const [route, setRoute] = useState("https://api.theoriehaast.nl/api/v1");
   const [emp,setEmp]=useState(false)
 
@@ -54,7 +54,8 @@ function App() {
     setLogin ,
     setLoader ,
     emp,
-    setEmp
+    setEmp,
+    filesRoute
     }}>
     <>
       <div className='app'>
