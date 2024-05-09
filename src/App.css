@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Kalam:wght@100..700&display=swap');
+
+#root {
+  padding: 0;
+  max-width:  100%;
+  width:  100%;
+  overflow-x: hidden;
+  /* text-transform: capitalize; */
+}
+
+a {
+  text-decoration: none;
+}
+button{
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  color: white;
+  text-transform: capitalize;
+  cursor: pointer;
+  font-weight: 600;
+}
+.loader-cont{
+  background-color: rgba(15, 15, 15, 0.856);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 120;
+}
+.loader {
+  display: block;
+  --height-of-loader: 4px;
+  --loader-color: #0071e2;
+  width: 130px;
+  height: var(--height-of-loader);
+  border-radius: 30px;
+  background-color: rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.loader::before {
+  content: "";
+  position: absolute;
+  background: var(--loader-color);
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  border-radius: 30px;
+  animation: moving 1s ease-in-out infinite;
+  ;
+}
+
+@keyframes moving {
+  50% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0;
+    right: 0;
+    left: unset;
+  }
+}
+.container{
+  width: 90%;
+  margin: auto;
+}
