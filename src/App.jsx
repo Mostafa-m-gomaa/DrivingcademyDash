@@ -1,60 +1,92 @@
-import React, { useContext, useState, useEffect, createContext } from "react";
-import { Route, Routes } from "react-router";
-import './App.css'
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Login from "./component/login/Login";
-import "aos/dist/aos.css";
-import AOS from "aos";
-import Home from "./component/home/Home";
-import Header from "./component/header/Header";
-import Packages from "./component/Packages/Packages";
-export const AppContext = createContext();
+import './App.css';
+import { BrowserRouter, Link, Route,Routes } from 'react-router-dom';
+import Sidebar from './layout/Sidebar/Sidebar';
+import ContentTop from './components/ContentTop/ContentTop';
+import { createContext, useEffect, useState } from 'react';
+import Login from './components/login/Login';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Articles from './components/articles/Articles';
+import Categories from './components/categories/Categories';
+import Edit from './components/edit-user/Edit';
+import Password from './components/password/Password';
+import Qasima from './components/qasima/Qasima';
+import Bank from './components/bank-pass/BankPass';
+import Transactions from './components/Transactions/Transactions';
+import Vertival from './components/vertical-trans/Vertical';
+import News from './components/news/News';
+import Employes from './components/emps/Employes';
+import Profits from './components/profits/Profits';
+import Packages from './components/activities/Activities';
+import Exams from './components/exams/Exams';
+
+
+export const AppContext =createContext()
 
 function App() {
-  const [login, setLogin] = useState(false);
-  const [token, setToken] = useState("");
-  const [loader, setLoader] = useState(false);
+  const [headTitle,setHeadTitle]=useState("تسجيل الدخول")
+  const [login,setLogin]=useState(false)
+  // const [route ,setRoute]=useState("https://api.max-sy.com/api")
+  // const [filesRoute ]=useState("https://api.max-sy.com/storage")
   const [route, setRoute] = useState("https://api.theoriehaast.nl/api/v1");
-  const [lang, setLang] = useState("en");
-  useEffect(() => {
-    if (sessionStorage.getItem("token")) {
-      setToken(localStorage.getItem("token"));
-      setLogin(true);
-    }
+  const [emp,setEmp]=useState(false)
 
-  }, [login]);
-  useEffect(() => {
-    AOS.init();
-  }, []);
+  const [loader,setLoader]=useState(false)
 
 
+  useEffect(()=>{
+    
+      setLogin(sessionStorage.getItem("login"))
+
+
+  },[login])
+  useEffect(()=>{
+    
+      setEmp(sessionStorage.getItem("emp"))
+
+
+  },[emp])
   return (
-    <AppContext.Provider value={{route ,setLoader ,
-    login ,
+    <AppContext.Provider value={{headTitle
+    ,setHeadTitle ,
+    route,
+    login,
     setLogin ,
-    token ,
-    setToken,
-    lang,
-    setLang}}>
+    setLoader ,
+    emp,
+    setEmp
+    }}>
     <>
-    <ToastContainer />
-    {loader ?
-    <div className="loader-cont">
-
-<div class="loader"></div>
-    </div>
-    :null}
-    <Header />
-    <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/packages" element={<Packages />} />
+      <div className='app'>
+      <ToastContainer />
+{loader ? <div className="loader-cont">
+<div class="banter-loader">
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+</div>
+</div> : null}
+        <Sidebar />
+      <div className="the-content">
+        <ContentTop />
        
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/users" element={<Employes/>} />
+      <Route path="Packages" element={<Packages/>} />
+      <Route path="Exams" element={<Exams/>} />
 
-    </Routes>
  
+    </Routes>
 
+      </div>
+      </div>
     </>
     </AppContext.Provider>
   )
