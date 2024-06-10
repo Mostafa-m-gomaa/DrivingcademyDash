@@ -16,6 +16,11 @@ const Emps = () => {
   const [name,setName]=useState("")
   const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
+    const [showAddPack,setShowAddPack]=useState(false)
+    const [packId,setPackId]=useState("")
+    const [userId,setUserId]=useState("")
+    const [amount,setAmount]=useState("")
+    const [packages,setPackages]=useState([])
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,10 +28,10 @@ const Emps = () => {
 
     
     try {
-      const response = await fetch(`${route}/auth/createEmployee`, {
+      const response = await fetch(`${route}/subscriptions`, {
         method: 'POST',
         body: JSON.stringify({
-            name ,email, password
+          user : userId ,package : packId, amount: amount
         }),
         headers:{
           "Authorization" :`Bearer ${sessionStorage.getItem("token")}` ,
@@ -35,10 +40,11 @@ const Emps = () => {
       })
       .then(res=>res.json());
       setLoader(false)
-      if (response.status=="Success") {
+      if (response.status=="success") {
   console.log(response)
   toast.success("تمت الأضافة")
   setRefresh(!refresh)
+  setShowAddPack(false)
       } 
       else if(response.errors){
 toast.error(response.errors.error)
@@ -78,6 +84,11 @@ setRefresh(!refresh)
       }
     })
   }
+  const addPackBtn =(idUser )=>{
+
+setUserId(idUser)
+setShowAddPack(true)
+  }
 
 
   useEffect(()=>{
@@ -94,6 +105,20 @@ setRefresh(!refresh)
       }
     })
   },[refresh])
+  useEffect(()=>{
+    fetch(`${route}/packages`,{
+      headers :{
+"Authorization" :`Bearer ${sessionStorage.getItem("token")}`
+}
+    })
+    .then(res=>res.json())
+    .then(data=>{
+     console.log(data)
+      if(data.data){
+     setPackages(data.data)
+      }
+    })
+  },[refresh])
 
   return (
 <div className="categs">
@@ -104,33 +129,38 @@ setRefresh(!refresh)
       <button onClick={() => setShowConfirm(false)} className='no'>No</button>
     </div>
   </div> :null}
-    <div className="container">
+  {showAddPack ? <div className="add-pack">
+    <div className="close" onClick={()=>setShowAddPack(false)}>
+      x
+    </div>
+    <h1>Add Package</h1>
     <div className="add">
-          {/* <h1>أضافة موظف</h1>
           <form action="" onSubmit={handleSubmit} >
+   <label htmlFor="">
+    <select name="" id="" onChange={(e)=>setPackId(e.target.value)}>
+      <option value="">اختر الباقة</option>
+      {packages.map((pack,index)=>{
+        return(
+          <option value={pack._id} key={index}>{pack.title_en}</option>
+        )
+      })}
+    </select>
+   </label>
           <label htmlFor="">
-            <input type="text" onChange={(e)=>setName(e.target.value)} />
-الاسم
+            <input type="text" onChange={(e)=>setAmount(e.target.value)} />
+Amount
           </label>
-          <label htmlFor="">
-            <input type="text" onChange={(e)=>setEmail(e.target.value)} />
-            الايميل
-          </label>
-          <label htmlFor="">
-            <input type="text" onChange={(e)=>setPassword(e.target.value)} />
-            كلمة السر
-          </label>
-   
-       
-  
+      
 
-
-  
             <button type='submit'>أضافة</button>
-          </form> */}
+          </form>
 
          
         </div>
+
+  </div>:null}
+    <div className="container">
+
        <div className="all-categs">
         <h1>Users</h1>
     
@@ -142,6 +172,7 @@ setRefresh(!refresh)
                 <div>{user.email} : الايميل</div>
       
                 {/* <button onClick={() => deleteButton(art.id)}>Delete</button> */}
+                <button className='add-pack-btn' onClick={()=>addPackBtn(user._id)}>add package</button>
               </div>
             )
           })}

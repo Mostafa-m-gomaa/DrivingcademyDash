@@ -4,6 +4,13 @@
     // background-color: white;
     // height: 90vh;
     color: white;
+    .add-pack-btn{
+        background-color: var(--clr-pumpkin);
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
     .confirm{
         position: fixed;
         top: 50%;

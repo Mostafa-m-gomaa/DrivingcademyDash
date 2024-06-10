@@ -119,7 +119,6 @@ formData.append('answer_ar', answerAr);
 formData.append('answer_hol', answerHol);
 formData.append('stage', stage);
 formData.append('image', image);
-console.log(answerStrEn.split(","))
 
 
  
@@ -139,7 +138,7 @@ console.log(answerStrEn.split(","))
       if (response.data) {
   console.log(response)
   toast.success("تمت الأضافة")
-  setShowAdd(false)
+  // setShowAdd(false)
   setRefresh(!refresh)
       } 
       else if(response.errors){

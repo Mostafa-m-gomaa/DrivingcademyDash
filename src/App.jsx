@@ -6,17 +6,7 @@ import { createContext, useEffect, useState } from 'react';
 import Login from './components/login/Login';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Articles from './components/articles/Articles';
-import Categories from './components/categories/Categories';
-import Edit from './components/edit-user/Edit';
-import Password from './components/password/Password';
-import Qasima from './components/qasima/Qasima';
-import Bank from './components/bank-pass/BankPass';
-import Transactions from './components/Transactions/Transactions';
-import Vertival from './components/vertical-trans/Vertical';
-import News from './components/news/News';
 import Employes from './components/emps/Employes';
-import Profits from './components/profits/Profits';
 import Packages from './components/activities/Activities';
 import Exams from './components/exams/Exams';
 

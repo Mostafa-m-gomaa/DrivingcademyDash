@@ -3,6 +3,13 @@
   margin: auto;
   color: white;
 }
+.articles .add-pack-btn {
+  background-color: var(--clr-pumpkin);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
 .articles .confirm {
   position: fixed;
   top: 50%;

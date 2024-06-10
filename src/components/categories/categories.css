@@ -3,6 +3,78 @@
   margin: auto;
   color: white;
 }
+.categs .add-pack-btn {
+  background-color: var(--clr-pumpkin);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 10px auto;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.categs .add-pack {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.781);
+  text-align: center;
+  padding: 15px;
+  border-radius: 10px;
+  z-index: 120;
+  width: 50%;
+}
+.categs .add-pack .close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: red;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+.categs .add-pack .add {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.575);
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+}
+.categs .add-pack .add button {
+  background-color: var(--clr-pumpkin);
+  color: white;
+}
+.categs .add-pack .add form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 70%;
+  margin: auto;
+}
+.categs .add-pack .add form .photos {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 90%;
+  margin: auto;
+}
+.categs .add-pack .add form .photos img {
+  max-width: 20%;
+  min-width: 20%;
+  min-height: 100px;
+  max-height: 100px;
+}
+.categs .add-pack .add form label {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+.categs .add-pack .add form label input {
+  width: 60%;
+}
 .categs .confirm {
   position: fixed;
   top: 50%;
