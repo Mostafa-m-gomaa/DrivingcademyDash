@@ -117,7 +117,7 @@ formData.append('options_hol', answersHol);
 formData.append('answer_en', answerEn);
 formData.append('answer_ar', answerAr);
 formData.append('answer_hol', answerHol);
-formData.append('stage', "1");
+formData.append('stage', "3");
 formData.append('image', image);
 
 
