@@ -117,7 +117,7 @@ formData.append('options_hol', answersHol);
 formData.append('answer_en', answerEn);
 formData.append('answer_ar', answerAr);
 formData.append('answer_hol', answerHol);
-formData.append('stage', stage);
+formData.append('stage', "1");
 formData.append('image', image);
 
 
@@ -349,7 +349,7 @@ getQuestions(examId)
             <input type="file" onChange={handleImageChange}  />
             image
         </label>
-          <label htmlFor="">
+          {/* <label htmlFor="">
             <select name="" id="" onChange={(e)=>setStage(e.target.value)}>
             <option value="">Select Stage</option>
             <option value="1">1</option>
@@ -357,7 +357,7 @@ getQuestions(examId)
             <option value="3">3</option>
             </select>
          stage
-        </label>
+        </label> */}
             <button type='submit'>أضافة</button>
           </form>
 
